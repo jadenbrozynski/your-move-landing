@@ -133,6 +133,14 @@
   border-color: #b8c7d4;
 }
 
+.feature-grid-cell {
+  transition: background 0.2s;
+}
+
+.feature-grid-cell:hover {
+  background: #fafbfc !important;
+}
+
 .testimonial-card {
   background: #fff;
   border: 1px solid #e5e7eb;
