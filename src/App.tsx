@@ -1,90 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 const NAVY = '#2b455c'
 const PLUM = '#a06178'
 const LIGHT_BLUE = '#b8c7d4'
 
-function PhoneMockup() {
-  return (
-    <div className="phone-float" style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-      {/* Glow behind */}
-      <div style={{ position: 'absolute', inset: '-40px', borderRadius: '50%', background: `radial-gradient(ellipse, ${PLUM}18 0%, transparent 70%)`, pointerEvents: 'none' }} />
-
-      <div className="phone-frame">
-        <div className="phone-notch" />
-        <div className="phone-screen">
-          {/* App header */}
-          <div className="phone-header">
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px' }}>
-              <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '0.85rem', color: LIGHT_BLUE }}>Your</span>
-              <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: '1rem', color: NAVY }}>Move</span>
-            </div>
-            <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#e8ecf0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: 16, height: 10, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                <div style={{ height: 1.5, background: NAVY, borderRadius: 2 }} />
-                <div style={{ height: 1.5, background: NAVY, borderRadius: 2, width: '70%' }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Section label */}
-          <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', textTransform: 'uppercase', paddingLeft: 2 }}>Your Feed</div>
-
-          {/* Feed card 1 */}
-          <div className="feed-card">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <div className="avatar" style={{ background: 'linear-gradient(135deg, #b8c7d4, #2b455c)' }} />
-              <div>
-                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: NAVY }}>Maya R.</div>
-                <div style={{ fontSize: '0.62rem', color: '#94a3b8' }}>2h ago</div>
-              </div>
-            </div>
-            <div style={{ fontSize: '0.72rem', color: '#4b6175', lineHeight: 1.5, marginBottom: 8 }}>
-              Took <span style={{ fontWeight: 600, color: NAVY }}>Sculpt</span> with{' '}
-              <span style={{ fontWeight: 700, color: PLUM, textDecoration: 'underline', textDecorationStyle: 'dotted' }}>Elizabeth K.</span>
-            </div>
-            <div className="stars">
-              {[1,2,3,4,5].map(i => <div key={i} className="star" />)}
-            </div>
-          </div>
-
-          {/* Feed card 2 */}
-          <div className="feed-card">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-              <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Trending Now</div>
-              <span className="pill-tag">NYC</span>
-            </div>
-            <div style={{ fontSize: '0.78rem', fontWeight: 700, color: NAVY, marginBottom: 4 }}>BODYBURN Studio</div>
-            <div style={{ fontSize: '0.65rem', color: '#94a3b8', marginBottom: 8 }}>Flatiron · $38/class</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ flex: 1, height: 4, background: '#e5e7eb', borderRadius: 4, overflow: 'hidden' }}>
-                <div style={{ width: '94%', height: '100%', background: PLUM, borderRadius: 4 }} />
-              </div>
-              <span style={{ fontSize: '0.65rem', fontWeight: 700, color: PLUM }}>94%</span>
-            </div>
-          </div>
-
-          {/* Feed card 3 - Leaderboard snippet */}
-          <div className="feed-card">
-            <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Leaderboard</div>
-            {[
-              { name: 'Chloe T.', count: 18, color: '#e5b84c' },
-              { name: 'You', count: 14, color: LIGHT_BLUE },
-              { name: 'Ava S.', count: 11, color: '#c4b8d4' },
-            ].map(({ name, count, color }, i) => (
-              <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: i < 2 ? 6 : 0 }}>
-                <div style={{ width: 16, height: 16, borderRadius: '50%', background: color, opacity: 0.8, flexShrink: 0 }} />
-                <span style={{ fontSize: '0.7rem', color: NAVY, flex: 1, fontWeight: name === 'You' ? 700 : 400 }}>{name}</span>
-                <span style={{ fontSize: '0.68rem', fontWeight: 700, color: PLUM }}>{count} classes</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+const HERO_IMAGE = 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1920&q=85'
 
 function SignupForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState('')
@@ -143,100 +64,131 @@ function SignupForm({ dark = false }: { dark?: boolean }) {
 }
 
 export default function App() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <div style={{ fontFamily: 'Inter, sans-serif', color: NAVY, overflowX: 'hidden', background: '#fff' }}>
 
       {/* NAV */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(255,255,255,0.85)',
-        backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid #eaeff3',
-        height: 60,
+        background: scrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid #eaeff3' : '1px solid transparent',
+        height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 max(24px, calc((100vw - 1200px) / 2))',
+        transition: 'background 0.3s, border-color 0.3s, backdrop-filter 0.3s',
       }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
-          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.45rem', color: LIGHT_BLUE, letterSpacing: '0.01em' }}>Your</span>
-          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.7rem', color: NAVY }}>Move</span>
+          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.45rem', color: scrolled ? LIGHT_BLUE : 'rgba(255,255,255,0.7)', transition: 'color 0.3s' }}>Your</span>
+          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.7rem', color: scrolled ? NAVY : '#fff', transition: 'color 0.3s' }}>Move</span>
         </div>
         <a
           href="#cta"
           style={{
-            background: NAVY, color: '#fff', padding: '9px 22px',
+            background: scrolled ? NAVY : 'rgba(255,255,255,0.15)',
+            backdropFilter: scrolled ? 'none' : 'blur(8px)',
+            border: scrolled ? 'none' : '1px solid rgba(255,255,255,0.3)',
+            color: '#fff', padding: '9px 22px',
             borderRadius: '100px', fontSize: '0.82rem', fontWeight: 500,
             textDecoration: 'none', letterSpacing: '0.02em',
-            transition: 'background 0.2s',
+            transition: 'background 0.3s',
           }}
           onMouseEnter={e => (e.currentTarget.style.background = PLUM)}
-          onMouseLeave={e => (e.currentTarget.style.background = NAVY)}
+          onMouseLeave={e => (e.currentTarget.style.background = scrolled ? NAVY : 'rgba(255,255,255,0.15)')}
         >
           Get Early Access
         </a>
       </nav>
 
-      {/* HERO */}
+      {/* HERO — full-screen image */}
       <section style={{
         minHeight: '100vh',
-        padding: '100px max(24px, calc((100vw - 1200px) / 2)) 80px',
-        background: 'linear-gradient(150deg, #ffffff 0%, #f4f7f9 50%, #edf1f4 100%)',
+        position: 'relative',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        overflow: 'hidden',
       }}>
-        <div className="hero-grid" style={{ display: 'flex', alignItems: 'center', gap: '80px', width: '100%', justifyContent: 'space-between' }}>
-          {/* Left: text */}
-          <div className="hero-text" style={{ flex: '0 0 auto', maxWidth: '520px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div className="fade-up fade-up-1">
-              <span className="badge">
-                <span className="badge-dot" />
-                Coming Soon
-              </span>
-            </div>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url(${HERO_IMAGE})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 30%',
+          transform: 'scale(1.03)',
+        }} />
+        {/* Gradient overlay — navy-tinted, darker at bottom */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `linear-gradient(
+            to bottom,
+            rgba(27,53,76,0.52) 0%,
+            rgba(27,53,76,0.65) 60%,
+            rgba(15,30,42,0.85) 100%
+          )`,
+        }} />
 
-            <div className="fade-up fade-up-1" style={{ marginBottom: '-8px' }}>
-              <img src="/logo.png" alt="Your Move" style={{ height: '72px', objectFit: 'contain', objectPosition: 'left' }} />
-            </div>
-
-            <h1 className="fade-up fade-up-2" style={{
-              fontFamily: 'Playfair Display, serif',
-              fontWeight: 600,
-              fontSize: 'clamp(2.6rem, 5vw, 3.8rem)',
-              color: NAVY,
-              lineHeight: 1.1,
-              letterSpacing: '-0.025em',
-              margin: 0,
-            }}>
-              Know before<br />you go.
-            </h1>
-
-            <p className="fade-up fade-up-3" style={{
-              fontSize: '1.05rem',
-              color: '#4b6175',
-              lineHeight: 1.75,
-              margin: 0,
-              maxWidth: '440px',
-            }}>
-              Real reviews, honest ratings, and workout insights for boutique fitness classes — from people who actually took them.
-            </p>
-
-            <div className="fade-up fade-up-4" style={{ maxWidth: '440px' }}>
-              <SignupForm />
-            </div>
-
-            <div className="fade-up fade-up-5" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              {['Instructor Reviews', 'Class Leaderboard', 'Friend Feed'].map((label, i) => (
-                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  {i > 0 && <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#c4d2dc' }} />}
-                  <span style={{ fontSize: '0.78rem', color: '#7a93a6', fontWeight: 500 }}>{label}</span>
-                </div>
-              ))}
-            </div>
+        {/* Content */}
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '680px', padding: '0 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
+          <div className="fade-up fade-up-1">
+            <span className="badge" style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.85)' }}>
+              <span className="badge-dot" />
+              Coming Soon
+            </span>
           </div>
 
-          {/* Right: phone mockup */}
-          <div style={{ flex: '0 0 auto' }}>
-            <PhoneMockup />
+          <div className="fade-up fade-up-1">
+            <img src="/logo.png" alt="Your Move" style={{ height: '80px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
           </div>
+
+          <h1 className="fade-up fade-up-2" style={{
+            fontFamily: 'Playfair Display, serif',
+            fontWeight: 600,
+            fontSize: 'clamp(3rem, 7vw, 5rem)',
+            color: '#fff',
+            lineHeight: 1.05,
+            letterSpacing: '-0.03em',
+            margin: 0,
+          }}>
+            Know before<br />you go.
+          </h1>
+
+          <p className="fade-up fade-up-3" style={{
+            fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+            color: 'rgba(220,232,240,0.9)',
+            lineHeight: 1.75,
+            margin: 0,
+            maxWidth: '480px',
+          }}>
+            Discover the best fitness classes and instructors through real reviews, ratings, and workout insights — before you book.
+          </p>
+
+          <div className="fade-up fade-up-4" style={{ width: '100%', maxWidth: '460px' }}>
+            <SignupForm dark />
+          </div>
+
+          <div className="fade-up fade-up-5" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {['Instructor Reviews', 'Class Leaderboard', 'Friend Feed'].map((label, i) => (
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {i > 0 && <div style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />}
+                <span style={{ fontSize: '0.78rem', color: 'rgba(184,199,212,0.85)', fontWeight: 400, letterSpacing: '0.01em' }}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll hint */}
+        <div style={{ position: 'absolute', bottom: '32px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', opacity: 0.5 }}>
+          <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))' }} />
         </div>
       </section>
 
