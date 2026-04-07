@@ -112,25 +112,13 @@ export default function App() {
       <section style={{
         minHeight: '100vh',
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '80px 32px 100px',
+        padding: '80px max(32px, calc((100vw - 1100px) / 2)) 80px',
         background: '#fff',
-        position: 'relative',
+        gap: '64px',
       }}>
-        {/* Very subtle background circle */}
-        <div style={{
-          position: 'absolute', top: '50%', left: '50%',
-          transform: 'translate(-50%, -55%)',
-          width: '700px', height: '700px', borderRadius: '50%',
-          background: `radial-gradient(ellipse, ${LIGHT_BLUE}18 0%, transparent 70%)`,
-          pointerEvents: 'none',
-        }} />
-
-        <div style={{ position: 'relative', maxWidth: '660px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '28px' }}>
-
+        {/* Left: text */}
+        <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '28px' }}>
           <div className="fade-up fade-up-1">
             <span className="badge">
               <span className="badge-dot" />
@@ -138,29 +126,24 @@ export default function App() {
             </span>
           </div>
 
-          {/* Logo */}
-          <div className="fade-up fade-up-2">
-            <img src="/logo.png" alt="Your Move" style={{ height: '88px', objectFit: 'contain' }} />
+          {/* Text logo */}
+          <div className="fade-up fade-up-2" style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', color: LIGHT_BLUE, letterSpacing: '0.01em' }}>Your</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(2.6rem, 6vw, 4.2rem)', color: NAVY, letterSpacing: '-0.02em' }}>Move</span>
           </div>
 
-          {/* Tagline */}
           <p className="fade-up fade-up-3" style={{
-            fontSize: 'clamp(0.95rem, 2.2vw, 1.15rem)',
-            color: '#5a7a8f',
-            lineHeight: 1.75,
-            margin: 0,
-            maxWidth: '500px',
+            fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
+            color: '#5a7a8f', lineHeight: 1.8, margin: 0, maxWidth: '420px',
           }}>
             Discover the best fitness classes and instructors through real reviews, ratings, and workout insights — before you book.
           </p>
 
-          {/* Form */}
-          <div className="fade-up fade-up-4" style={{ width: '100%', maxWidth: '440px' }}>
+          <div className="fade-up fade-up-4" style={{ maxWidth: '420px' }}>
             <SignupForm />
           </div>
 
-          {/* Pill tags */}
-          <div className="fade-up fade-up-5" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div className="fade-up fade-up-5" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             {['Instructor Reviews', 'Class Leaderboard', 'Friend Feed', 'Trending Studios'].map(t => (
               <span key={t} style={{
                 fontSize: '0.72rem', color: '#7a93a6', fontWeight: 500,
@@ -168,6 +151,22 @@ export default function App() {
                 padding: '5px 12px', letterSpacing: '0.01em',
               }}>{t}</span>
             ))}
+          </div>
+        </div>
+
+        {/* Right: image */}
+        <div className="fade-up fade-up-3 hero-img-wrap" style={{ flex: '0 0 auto', width: 'min(440px, 42vw)' }}>
+          <div style={{
+            borderRadius: '24px',
+            overflow: 'hidden',
+            aspectRatio: '3/4',
+            boxShadow: '0 24px 80px rgba(43,69,92,0.16), 0 4px 16px rgba(43,69,92,0.08)',
+          }}>
+            <img
+              src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=900&q=85"
+              alt="Boutique fitness class"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+            />
           </div>
         </div>
       </section>

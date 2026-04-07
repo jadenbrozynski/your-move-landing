@@ -157,6 +157,12 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .hero-img-wrap {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .stat-item + .stat-item {
     border-left: none;
