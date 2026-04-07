@@ -1,54 +1,92 @@
 import { useState } from 'react'
+import './App.css'
 
 const NAVY = '#2b455c'
 const PLUM = '#a06178'
 const LIGHT_BLUE = '#b8c7d4'
-const LIGHT_GREY = '#e5e7eb'
 
-function NavBar() {
+function PhoneMockup() {
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        background: 'rgba(255,255,255,0.92)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: `1px solid ${LIGHT_GREY}`,
-        padding: '0 2rem',
-        height: '64px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-        <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.6rem', color: LIGHT_BLUE }}>Your</span>
-        <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.9rem', color: NAVY }}>Move</span>
+    <div className="phone-float" style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+      {/* Glow behind */}
+      <div style={{ position: 'absolute', inset: '-40px', borderRadius: '50%', background: `radial-gradient(ellipse, ${PLUM}18 0%, transparent 70%)`, pointerEvents: 'none' }} />
+
+      <div className="phone-frame">
+        <div className="phone-notch" />
+        <div className="phone-screen">
+          {/* App header */}
+          <div className="phone-header">
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '3px' }}>
+              <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '0.85rem', color: LIGHT_BLUE }}>Your</span>
+              <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: '1rem', color: NAVY }}>Move</span>
+            </div>
+            <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#e8ecf0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 16, height: 10, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <div style={{ height: 1.5, background: NAVY, borderRadius: 2 }} />
+                <div style={{ height: 1.5, background: NAVY, borderRadius: 2, width: '70%' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Section label */}
+          <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.1em', textTransform: 'uppercase', paddingLeft: 2 }}>Your Feed</div>
+
+          {/* Feed card 1 */}
+          <div className="feed-card">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+              <div className="avatar" style={{ background: 'linear-gradient(135deg, #b8c7d4, #2b455c)' }} />
+              <div>
+                <div style={{ fontSize: '0.7rem', fontWeight: 600, color: NAVY }}>Maya R.</div>
+                <div style={{ fontSize: '0.62rem', color: '#94a3b8' }}>2h ago</div>
+              </div>
+            </div>
+            <div style={{ fontSize: '0.72rem', color: '#4b6175', lineHeight: 1.5, marginBottom: 8 }}>
+              Took <span style={{ fontWeight: 600, color: NAVY }}>Sculpt</span> with{' '}
+              <span style={{ fontWeight: 700, color: PLUM, textDecoration: 'underline', textDecorationStyle: 'dotted' }}>Elizabeth K.</span>
+            </div>
+            <div className="stars">
+              {[1,2,3,4,5].map(i => <div key={i} className="star" />)}
+            </div>
+          </div>
+
+          {/* Feed card 2 */}
+          <div className="feed-card">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+              <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Trending Now</div>
+              <span className="pill-tag">NYC</span>
+            </div>
+            <div style={{ fontSize: '0.78rem', fontWeight: 700, color: NAVY, marginBottom: 4 }}>BODYBURN Studio</div>
+            <div style={{ fontSize: '0.65rem', color: '#94a3b8', marginBottom: 8 }}>Flatiron · $38/class</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ flex: 1, height: 4, background: '#e5e7eb', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ width: '94%', height: '100%', background: PLUM, borderRadius: 4 }} />
+              </div>
+              <span style={{ fontSize: '0.65rem', fontWeight: 700, color: PLUM }}>94%</span>
+            </div>
+          </div>
+
+          {/* Feed card 3 - Leaderboard snippet */}
+          <div className="feed-card">
+            <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Leaderboard</div>
+            {[
+              { name: 'Chloe T.', count: 18, color: '#e5b84c' },
+              { name: 'You', count: 14, color: LIGHT_BLUE },
+              { name: 'Ava S.', count: 11, color: '#c4b8d4' },
+            ].map(({ name, count, color }, i) => (
+              <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: i < 2 ? 6 : 0 }}>
+                <div style={{ width: 16, height: 16, borderRadius: '50%', background: color, opacity: 0.8, flexShrink: 0 }} />
+                <span style={{ fontSize: '0.7rem', color: NAVY, flex: 1, fontWeight: name === 'You' ? 700 : 400 }}>{name}</span>
+                <span style={{ fontSize: '0.68rem', fontWeight: 700, color: PLUM }}>{count} classes</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <a
-        href="#cta"
-        style={{
-          background: NAVY,
-          color: '#fff',
-          padding: '10px 24px',
-          borderRadius: '100px',
-          fontSize: '0.875rem',
-          fontWeight: 500,
-          textDecoration: 'none',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.background = PLUM)}
-        onMouseLeave={e => (e.currentTarget.style.background = NAVY)}
-      >
-        Get Early Access
-      </a>
-    </nav>
+    </div>
   )
 }
 
-function SignupForm() {
+function SignupForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -57,7 +95,7 @@ function SignupForm() {
     e.preventDefault()
     if (!email) return
     setLoading(true)
-    await new Promise(r => setTimeout(r, 800))
+    await new Promise(r => setTimeout(r, 900))
     setLoading(false)
     setSubmitted(true)
   }
@@ -65,297 +103,342 @@ function SignupForm() {
   if (submitted) {
     return (
       <div style={{
-        background: `${PLUM}15`,
-        border: `1.5px solid ${PLUM}40`,
+        background: dark ? 'rgba(255,255,255,0.08)' : '#f0f4f7',
+        border: `1.5px solid ${dark ? 'rgba(255,255,255,0.15)' : '#dce4eb'}`,
         borderRadius: '16px',
-        padding: '24px 32px',
+        padding: '20px 28px',
         textAlign: 'center',
-        maxWidth: '480px',
-        margin: '0 auto',
       }}>
-        <p style={{ fontWeight: 600, color: NAVY, fontSize: '1.1rem' }}>✅ You're on the list!</p>
-        <p style={{ color: '#6b7280', marginTop: '6px', fontSize: '0.9rem' }}>We'll let you know the moment Your Move launches.</p>
+        <p style={{ fontWeight: 600, color: dark ? '#fff' : NAVY, fontSize: '1rem' }}>
+          ✅ You're on the list.
+        </p>
+        <p style={{ color: dark ? LIGHT_BLUE : '#6b7280', marginTop: '4px', fontSize: '0.85rem' }}>
+          We'll reach out when Your Move launches near you.
+        </p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: '480px', margin: '0 auto', width: '100%' }}>
-      <div style={{
-        display: 'flex',
-        gap: '10px',
-        background: '#fff',
-        border: `1.5px solid ${LIGHT_GREY}`,
-        borderRadius: '100px',
-        padding: '6px 6px 6px 20px',
-        boxShadow: '0 4px 24px rgba(43,69,92,0.1)',
-      }}>
+    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+      <div className="email-wrap" style={dark ? { background: 'rgba(255,255,255,0.06)', border: '1.5px solid rgba(255,255,255,0.15)' } : {}}>
         <input
           type="email"
           required
-          placeholder="your@email.com"
+          placeholder="Enter your email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          style={{
-            flex: 1,
-            border: 'none',
-            outline: 'none',
-            fontSize: '0.95rem',
-            color: NAVY,
-            background: 'transparent',
-            fontFamily: 'Inter, sans-serif',
-          }}
+          className="email-input"
+          style={dark ? { color: '#fff' } : {}}
         />
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            background: PLUM,
-            color: '#fff',
-            border: 'none',
-            borderRadius: '100px',
-            padding: '12px 24px',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.7 : 1,
-            fontFamily: 'Inter, sans-serif',
-            whiteSpace: 'nowrap',
-          }}
-        >
+        <button type="submit" disabled={loading} className="cta-btn">
           {loading ? 'Joining...' : 'Join Waitlist'}
         </button>
       </div>
-      <p style={{ textAlign: 'center', color: '#9ca3af', fontSize: '0.8rem', marginTop: '12px' }}>
-        No spam, ever. Be first to know when we launch.
+      <p style={{ color: dark ? 'rgba(184,199,212,0.7)' : '#94a3b8', fontSize: '0.78rem', marginTop: '10px', textAlign: 'center' }}>
+        No spam · Free to join · Be first to launch
       </p>
     </form>
   )
 }
 
-const features = [
-  {
-    icon: '⭐',
-    title: 'Instructor Ratings & Reviews',
-    desc: "Real, honest reviews from people who've actually taken the class — so you know exactly what you're signing up for.",
-  },
-  {
-    icon: '🏆',
-    title: 'Class Leaderboard',
-    desc: "See who's crushing their fitness goals. Track classes taken and climb the ranks with your friends.",
-  },
-  {
-    icon: '🔥',
-    title: 'Trending Classes',
-    desc: "Discover what's hot in your city right now — trending studios, instructors, and workout styles.",
-  },
-  {
-    icon: '👯',
-    title: 'Workout Feed',
-    desc: '"Katherine sculpted with Elizabeth." See what your friends are taking and get inspired.',
-  },
-]
-
-const painPoints = [
-  { stat: '$30–50', label: 'avg. boutique class cost' },
-  { stat: '68%', label: 'of people quit after a bad first class' },
-  { stat: '0', label: 'honest reviews on studio apps' },
-]
-
-const testimonials = [
-  {
-    quote: 'I wasted so much money trying random Pilates studios. I needed something like this months ago.',
-    name: 'Maya R.',
-    detail: 'NYC, post-grad',
-  },
-  {
-    quote: 'The instructors vary SO much. One good review from a friend would have saved me three bad classes.',
-    name: 'Chloe T.',
-    detail: 'Chicago, college senior',
-  },
-  {
-    quote: 'I love seeing what my friends are taking — it\'s like Strava but for fitness classes.',
-    name: 'Ava S.',
-    detail: 'LA, 24',
-  },
-]
-
 export default function App() {
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif', overflowX: 'hidden', color: NAVY }}>
-      <NavBar />
+    <div style={{ fontFamily: 'Inter, sans-serif', color: NAVY, overflowX: 'hidden', background: '#fff' }}>
+
+      {/* NAV */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #eaeff3',
+        height: 60,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 max(24px, calc((100vw - 1200px) / 2))',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.45rem', color: LIGHT_BLUE, letterSpacing: '0.01em' }}>Your</span>
+          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.7rem', color: NAVY }}>Move</span>
+        </div>
+        <a
+          href="#cta"
+          style={{
+            background: NAVY, color: '#fff', padding: '9px 22px',
+            borderRadius: '100px', fontSize: '0.82rem', fontWeight: 500,
+            textDecoration: 'none', letterSpacing: '0.02em',
+            transition: 'background 0.2s',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = PLUM)}
+          onMouseLeave={e => (e.currentTarget.style.background = NAVY)}
+        >
+          Get Early Access
+        </a>
+      </nav>
 
       {/* HERO */}
       <section style={{
         minHeight: '100vh',
+        padding: '100px max(24px, calc((100vw - 1200px) / 2)) 80px',
+        background: 'linear-gradient(150deg, #ffffff 0%, #f4f7f9 50%, #edf1f4 100%)',
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '100px 24px 80px',
-        background: 'linear-gradient(160deg, #ffffff 0%, #f0f4f7 60%, #e8ecf0 100%)',
-        position: 'relative',
-        overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: '10%', right: '5%', width: '400px', height: '400px', borderRadius: '50%', background: `${PLUM}08`, filter: 'blur(60px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '10%', left: '5%', width: '300px', height: '300px', borderRadius: '50%', background: `${LIGHT_BLUE}30`, filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div className="hero-grid" style={{ display: 'flex', alignItems: 'center', gap: '80px', width: '100%', justifyContent: 'space-between' }}>
+          {/* Left: text */}
+          <div className="hero-text" style={{ flex: '0 0 auto', maxWidth: '520px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div className="fade-up fade-up-1">
+              <span className="badge">
+                <span className="badge-dot" />
+                Coming Soon
+              </span>
+            </div>
 
-        <div style={{ position: 'relative', maxWidth: '720px', margin: '0 auto' }}>
-          <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
-            <img src="/logo.png" alt="Your Move" style={{ height: '90px', objectFit: 'contain' }} />
+            <div className="fade-up fade-up-1" style={{ marginBottom: '-8px' }}>
+              <img src="/logo.png" alt="Your Move" style={{ height: '72px', objectFit: 'contain', objectPosition: 'left' }} />
+            </div>
+
+            <h1 className="fade-up fade-up-2" style={{
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 600,
+              fontSize: 'clamp(2.6rem, 5vw, 3.8rem)',
+              color: NAVY,
+              lineHeight: 1.1,
+              letterSpacing: '-0.025em',
+              margin: 0,
+            }}>
+              Know before<br />you go.
+            </h1>
+
+            <p className="fade-up fade-up-3" style={{
+              fontSize: '1.05rem',
+              color: '#4b6175',
+              lineHeight: 1.75,
+              margin: 0,
+              maxWidth: '440px',
+            }}>
+              Real reviews, honest ratings, and workout insights for boutique fitness classes — from people who actually took them.
+            </p>
+
+            <div className="fade-up fade-up-4" style={{ maxWidth: '440px' }}>
+              <SignupForm />
+            </div>
+
+            <div className="fade-up fade-up-5" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              {['Instructor Reviews', 'Class Leaderboard', 'Friend Feed'].map((label, i) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {i > 0 && <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#c4d2dc' }} />}
+                  <span style={{ fontSize: '0.78rem', color: '#7a93a6', fontWeight: 500 }}>{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <h1 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontWeight: 600,
-            fontSize: 'clamp(2.4rem, 6vw, 4rem)',
-            color: NAVY,
-            lineHeight: 1.15,
-            marginBottom: '20px',
-            letterSpacing: '-0.02em',
-          }}>
-            Know before you go.
-          </h1>
-          <p style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-            color: '#4b6175',
-            lineHeight: 1.7,
-            maxWidth: '540px',
-            margin: '0 auto 48px',
-          }}>
-            Discover the best fitness classes and instructors through real reviews, ratings, and workout insights — before you spend $40 finding out.
-          </p>
-          <SignupForm />
+
+          {/* Right: phone mockup */}
+          <div style={{ flex: '0 0 auto' }}>
+            <PhoneMockup />
+          </div>
         </div>
       </section>
 
-      {/* PAIN POINTS */}
-      <section style={{ background: NAVY, padding: '80px 24px' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ color: LIGHT_BLUE, textTransform: 'uppercase', letterSpacing: '0.12em', fontSize: '0.78rem', fontWeight: 600, marginBottom: '16px' }}>The problem</p>
-          <h2 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontWeight: 600,
-            fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
-            color: '#fff',
-            marginBottom: '60px',
-            lineHeight: 1.3,
-          }}>
-            You're spending real money on classes you know nothing about.
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
-            {painPoints.map(({ stat, label }) => (
-              <div key={label} style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', fontWeight: 600, color: PLUM, marginBottom: '8px' }}>{stat}</div>
-                <div style={{ color: LIGHT_BLUE, fontSize: '0.9rem' }}>{label}</div>
-              </div>
-            ))}
-          </div>
+      {/* STATS STRIP */}
+      <section style={{ background: NAVY, padding: '64px max(24px, calc((100vw - 1200px) / 2))' }}>
+        <div className="stats-grid" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
+          {[
+            { stat: '$30–50', label: 'average boutique class cost' },
+            { stat: '1 in 3', label: 'people quit after one bad experience' },
+            { stat: '0 honest', label: 'reviews on most studio apps' },
+          ].map(({ stat, label }) => (
+            <div className="stat-item" key={label}>
+              <div style={{
+                fontFamily: 'Playfair Display, serif',
+                fontWeight: 600,
+                fontSize: 'clamp(2rem, 5vw, 3rem)',
+                color: PLUM,
+                letterSpacing: '-0.02em',
+                marginBottom: '6px',
+              }}>{stat}</div>
+              <div style={{ color: LIGHT_BLUE, fontSize: '0.82rem', maxWidth: '180px', lineHeight: 1.5 }}>{label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* FEATURES */}
-      <section style={{ padding: '100px 24px', background: '#f8f9fb' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.12em', fontSize: '0.78rem', fontWeight: 600, marginBottom: '16px' }}>What you get</p>
-            <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: NAVY, lineHeight: 1.25 }}>
-              Your fitness life, finally organized.
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
-            {features.map(({ icon, title, desc }) => (
-              <div
-                key={title}
-                style={{ background: '#fff', borderRadius: '20px', padding: '32px 28px', boxShadow: '0 2px 20px rgba(43,69,92,0.07)', border: `1px solid ${LIGHT_GREY}`, display: 'flex', flexDirection: 'column', gap: '14px', transition: 'transform 0.2s, box-shadow 0.2s' }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = '0 8px 32px rgba(43,69,92,0.12)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 2px 20px rgba(43,69,92,0.07)' }}
-              >
-                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: `${PLUM}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem' }}>{icon}</div>
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: '1.15rem', color: NAVY }}>{title}</h3>
-                <p style={{ color: '#6b7280', lineHeight: 1.6, fontSize: '0.9rem' }}>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section style={{ padding: '100px 24px', background: '#fff' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.12em', fontSize: '0.78rem', fontWeight: 600, marginBottom: '16px' }}>How it works</p>
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: NAVY, marginBottom: '64px', lineHeight: 1.25 }}>
-            Three steps to your perfect class.
+      <section style={{ padding: '96px max(24px, calc((100vw - 1200px) / 2))', background: '#f8f9fb' }}>
+        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.72rem', fontWeight: 700, marginBottom: '14px' }}>
+            Built for this
+          </p>
+          <h2 style={{
+            fontFamily: 'Playfair Display, serif', fontWeight: 600,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', color: NAVY, lineHeight: 1.2, margin: 0,
+          }}>
+            Everything you wish you had<br />before booking that class.
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '40px' }}>
-            {[
-              { step: '01', title: 'Search', desc: 'Browse classes, instructors, and studios in your city.' },
-              { step: '02', title: 'Read Real Reviews', desc: 'See honest ratings from people who have actually taken the class.' },
-              { step: '03', title: 'Book with Confidence', desc: 'Show up knowing exactly what to expect. No more wasted money.' },
-            ].map(({ step, title, desc }) => (
-              <div key={step} style={{ textAlign: 'center', padding: '0 16px' }}>
-                <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '3rem', fontWeight: 600, color: `${PLUM}30`, lineHeight: 1, marginBottom: '16px' }}>{step}</div>
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: '1.2rem', color: NAVY, marginBottom: '12px' }}>{title}</h3>
-                <p style={{ color: '#6b7280', lineHeight: 1.6, fontSize: '0.9rem' }}>{desc}</p>
-              </div>
-            ))}
-          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+          {[
+            {
+              num: '01',
+              title: 'Instructor Ratings',
+              desc: 'Filter by instructor, read real reviews, and see exactly who runs each class — before you spend $40 finding out.',
+            },
+            {
+              num: '02',
+              title: 'Friend Feed',
+              desc: '"Maya sculpted with Elizabeth." See what your friends are taking, like their workouts, and get inspired.',
+            },
+            {
+              num: '03',
+              title: 'Trending Classes',
+              desc: "Discover what's popular in your city right now — sorted by vibe, level, and community rating.",
+            },
+            {
+              num: '04',
+              title: 'Class Leaderboard',
+              desc: 'Track every class you take. Climb the leaderboard with your friends and build your streak.',
+            },
+          ].map(({ num, title, desc }) => (
+            <div className="feature-card" key={num}>
+              <div style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: '2.2rem',
+                fontWeight: 600,
+                color: `${PLUM}25`,
+                lineHeight: 1,
+                marginBottom: '20px',
+                letterSpacing: '-0.02em',
+              }}>{num}</div>
+              <h3 style={{
+                fontFamily: 'Playfair Display, serif',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                color: NAVY,
+                marginBottom: '10px',
+              }}>{title}</h3>
+              <p style={{ color: '#6b7280', lineHeight: 1.65, fontSize: '0.88rem' }}>{desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: '100px 24px', background: '#f8f9fb' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.12em', fontSize: '0.78rem', fontWeight: 600, marginBottom: '16px' }}>From real users</p>
-            <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: NAVY, lineHeight: 1.25 }}>They get it.</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-            {testimonials.map(({ quote, name, detail }) => (
-              <div key={name} style={{ background: '#fff', borderRadius: '20px', padding: '32px 28px', boxShadow: '0 2px 20px rgba(43,69,92,0.07)', border: `1px solid ${LIGHT_GREY}`, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <p style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: '1.05rem', color: NAVY, lineHeight: 1.65 }}>"{quote}"</p>
-                <div>
-                  <p style={{ fontWeight: 600, fontSize: '0.9rem', color: NAVY }}>{name}</p>
-                  <p style={{ fontSize: '0.8rem', color: PLUM, marginTop: '2px' }}>{detail}</p>
-                </div>
+      <section style={{ padding: '96px max(24px, calc((100vw - 1200px) / 2))', background: '#fff' }}>
+        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.72rem', fontWeight: 700, marginBottom: '14px' }}>
+            Early users
+          </p>
+          <h2 style={{
+            fontFamily: 'Playfair Display, serif', fontWeight: 600,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', color: NAVY, lineHeight: 1.2, margin: 0,
+          }}>
+            They get it.
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+          {[
+            {
+              quote: "I wasted so much money trying random Pilates studios. I needed something like this months ago.",
+              name: 'Maya R.',
+              location: 'New York, NY',
+            },
+            {
+              quote: "The instructor makes or breaks the class. One honest review from a friend would have saved me three bad experiences.",
+              name: 'Chloe T.',
+              location: 'Chicago, IL',
+            },
+            {
+              quote: "It's like Strava but for fitness classes. I want to see what my friends are actually taking — not just studio marketing.",
+              name: 'Ava S.',
+              location: 'Los Angeles, CA',
+            },
+          ].map(({ quote, name, location }) => (
+            <div className="testimonial-card" key={name}>
+              {/* Quote mark */}
+              <div style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: '3rem',
+                color: `${PLUM}25`,
+                lineHeight: 0.8,
+                fontWeight: 600,
+              }}>"</div>
+              <p style={{
+                fontFamily: 'Playfair Display, serif',
+                fontStyle: 'italic',
+                fontSize: '1rem',
+                color: NAVY,
+                lineHeight: 1.7,
+                flex: 1,
+              }}>{quote}</p>
+              <div style={{ borderTop: '1px solid #eaeff3', paddingTop: '16px' }}>
+                <p style={{ fontWeight: 600, fontSize: '0.85rem', color: NAVY }}>{name}</p>
+                <p style={{ fontSize: '0.78rem', color: PLUM, marginTop: '2px' }}>{location}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* CTA */}
       <section id="cta" style={{
-        padding: '120px 24px',
-        background: `linear-gradient(135deg, ${NAVY} 0%, #1e3347 100%)`,
+        padding: '100px max(24px, calc((100vw - 1200px) / 2))',
+        background: `linear-gradient(140deg, ${NAVY} 0%, #1a2f40 100%)`,
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: `${PLUM}15`, pointerEvents: 'none' }} />
-        <div style={{ position: 'relative', maxWidth: '600px', margin: '0 auto' }}>
-          <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center', alignItems: 'baseline', gap: '6px' }}>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.8rem', color: LIGHT_BLUE }}>Your</span>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '2.1rem', color: '#fff' }}>Move</span>
+        {/* Decorative */}
+        <div style={{ position: 'absolute', top: '-120px', right: '-120px', width: '500px', height: '500px', borderRadius: '50%', background: `${PLUM}12`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '350px', height: '350px', borderRadius: '50%', background: `${LIGHT_BLUE}08`, pointerEvents: 'none' }} />
+
+        <div style={{ position: 'relative', maxWidth: '520px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '6px', marginBottom: '28px' }}>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.6rem', color: LIGHT_BLUE }}>Your</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.9rem', color: '#fff' }}>Move</span>
           </div>
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', color: '#fff', marginBottom: '16px', lineHeight: 1.25 }}>
-            Be the first to know.
+
+          <h2 style={{
+            fontFamily: 'Playfair Display, serif',
+            fontWeight: 600,
+            fontSize: 'clamp(1.9rem, 4.5vw, 3rem)',
+            color: '#fff',
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em',
+            marginBottom: '16px',
+          }}>
+            Be first.<br />Move smarter.
           </h2>
-          <p style={{ color: LIGHT_BLUE, fontSize: '1.05rem', marginBottom: '48px', lineHeight: 1.6 }}>
-            Your Move is coming soon. Join the waitlist and get early access when we launch in your city.
+
+          <p style={{ color: LIGHT_BLUE, fontSize: '1rem', marginBottom: '40px', lineHeight: 1.7 }}>
+            Your Move is launching soon. Get early access and be the first to know when we come to your city.
           </p>
-          <SignupForm />
+
+          <SignupForm dark />
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: '#0f1e2a', padding: '32px 24px', textAlign: 'center', color: '#6b8aa0', fontSize: '0.85rem' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '6px', marginBottom: '12px' }}>
-          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, color: LIGHT_BLUE }}>Your</span>
-          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', color: '#fff' }}>Move</span>
+      <footer style={{
+        background: '#0d1b26',
+        padding: '28px max(24px, calc((100vw - 1200px) / 2))',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '12px',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1rem', color: LIGHT_BLUE }}>Your</span>
+          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', color: '#fff', fontSize: '1.1rem' }}>Move</span>
         </div>
-        <p>your movement. your money. know before you go.</p>
-        <p style={{ marginTop: '16px', color: '#3d5a6e', fontSize: '0.78rem' }}>© {new Date().getFullYear()} Your Move. All rights reserved.</p>
+        <p style={{ color: '#3d5a6e', fontSize: '0.78rem', margin: 0 }}>
+          your movement. your money. know before you go.
+        </p>
+        <p style={{ color: '#2a4255', fontSize: '0.75rem', margin: 0 }}>
+          © {new Date().getFullYear()} Your Move
+        </p>
       </footer>
     </div>
   )
