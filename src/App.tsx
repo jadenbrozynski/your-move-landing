@@ -163,9 +163,9 @@ export default function App() {
             boxShadow: '0 24px 80px rgba(43,69,92,0.16), 0 4px 16px rgba(43,69,92,0.08)',
           }}>
             <img
-              src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=900&q=85"
-              alt="Boutique fitness class"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+              src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=900&q=85"
+              alt="Pilates class"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block' }}
             />
           </div>
         </div>
@@ -210,79 +210,83 @@ export default function App() {
       </section>
 
       {/* ── STATS ── */}
-      <section style={{ background: NAVY, padding: '64px max(32px, calc((100vw - 1100px) / 2))' }}>
-        <div className="stats-grid" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <section style={{ background: NAVY, padding: '80px max(32px, calc((100vw - 1100px) / 2))' }}>
+        <p style={{ color: `${LIGHT_BLUE}70`, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.68rem', fontWeight: 600, textAlign: 'center', marginBottom: '48px' }}>
+          The problem with boutique fitness
+        </p>
+        <div className="stats-grid" style={{ display: 'flex', alignItems: 'stretch', justifyContent: 'center' }}>
           {[
-            { stat: '$30–50', label: 'average boutique class' },
-            { stat: '1 in 3', label: 'quit after one bad class' },
-            { stat: '0', label: 'honest reviews on studio apps' },
-          ].map(({ stat, label }) => (
-            <div className="stat-item" key={label}>
+            { stat: '$30–50', label: 'per boutique class', sub: 'with no guarantee it\'s worth it' },
+            { stat: '1 in 3', label: 'quit after one bad experience', sub: 'the wrong instructor ruins it' },
+            { stat: '0', label: 'honest reviews on studio apps', sub: 'they only show what they want you to see' },
+          ].map(({ stat, label, sub }) => (
+            <div className="stat-item" key={label} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div style={{
                 fontFamily: 'Playfair Display, serif', fontWeight: 600,
-                fontSize: 'clamp(2rem, 4vw, 2.8rem)', color: PLUM,
-                letterSpacing: '-0.02em', marginBottom: '6px',
+                fontSize: 'clamp(2.4rem, 5vw, 3.4rem)', color: PLUM,
+                letterSpacing: '-0.03em', lineHeight: 1,
               }}>{stat}</div>
-              <div style={{ color: LIGHT_BLUE, fontSize: '0.8rem', maxWidth: '160px', lineHeight: 1.5 }}>{label}</div>
+              <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 500 }}>{label}</div>
+              <div style={{ color: `${LIGHT_BLUE}80`, fontSize: '0.75rem', lineHeight: 1.5, maxWidth: '180px' }}>{sub}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── FEATURES ── */}
-      <section style={{ padding: '96px max(32px, calc((100vw - 1100px) / 2))', background: '#fff' }}>
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.7rem', fontWeight: 700, marginBottom: '14px' }}>
-            Features
+      <section style={{ padding: '100px max(32px, calc((100vw - 1100px) / 2))', background: '#fff' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '56px', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.68rem', fontWeight: 700, marginBottom: '12px' }}>Features</p>
+            <h2 style={{
+              fontFamily: 'Playfair Display, serif', fontWeight: 600,
+              fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', color: NAVY, lineHeight: 1.15, margin: 0,
+            }}>
+              Everything you need.<br />Nothing you don't.
+            </h2>
+          </div>
+          <p style={{ color: '#7a93a6', fontSize: '0.875rem', maxWidth: '260px', lineHeight: 1.65, margin: 0 }}>
+            Built around how people actually discover and choose fitness classes.
           </p>
-          <h2 style={{
-            fontFamily: 'Playfair Display, serif', fontWeight: 600,
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', color: NAVY, lineHeight: 1.2, margin: 0,
-          }}>
-            Everything you need.<br />Nothing you don't.
-          </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1px', background: '#eaeff3', borderRadius: '20px', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
           {[
             {
               title: 'Instructor Ratings',
-              desc: 'Filter by instructor, read real reviews, and know who runs each class before you spend $45 finding out.',
+              desc: 'Read honest reviews by instructor — not just the studio. Know exactly who\'s teaching before you show up.',
             },
             {
               title: 'Friend Feed',
-              desc: '"Maya sculpted with Elizabeth." See what your friends are taking, like their workouts, and get inspired.',
+              desc: '"Maya sculpted with Elizabeth." See what your friends are taking, like their workouts, and stay in sync.',
             },
             {
               title: 'Trending Classes',
-              desc: "Discover what's hot in your city this week — sorted by community rating and momentum.",
+              desc: "See what's gaining momentum in your city this week — sorted by real ratings and community activity.",
             },
             {
               title: 'Class Leaderboard',
-              desc: 'Track every class you take. Build your streak, climb the leaderboard, and stay accountable.',
+              desc: 'Every class logged counts. Build your streak, climb the board with friends, and stay accountable.',
             },
           ].map(({ title, desc }, i) => (
-            <div key={title} className="feature-grid-cell" style={{
-              background: '#fff',
-              padding: '40px 32px',
+            <div key={title} style={{
+              background: i % 2 === 0 ? '#f8f9fb' : '#fff',
+              border: '1px solid #eaeff3',
+              borderRadius: '18px',
+              padding: '36px 28px',
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px',
-            }}>
-              <div style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: '1.6rem',
-                fontWeight: 600,
-                color: `${PLUM}28`,
-                lineHeight: 1,
-              }}>0{i + 1}</div>
-              <h3 style={{
-                fontFamily: 'Playfair Display, serif',
-                fontWeight: 600,
-                fontSize: '1.05rem',
-                color: NAVY,
-                margin: 0,
-              }}>{title}</h3>
+              gap: '14px',
+              transition: 'border-color 0.2s, box-shadow 0.2s',
+            }}
+              onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = LIGHT_BLUE; el.style.boxShadow = '0 8px 32px rgba(43,69,92,0.08)' }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = '#eaeff3'; el.style.boxShadow = 'none' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '0.8rem', fontWeight: 600, color: PLUM, letterSpacing: '0.06em' }}>0{i + 1}</span>
+                <div style={{ width: 28, height: 1, background: `${PLUM}40` }} />
+              </div>
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: '1.1rem', color: NAVY, margin: 0 }}>{title}</h3>
               <p style={{ color: '#6b7280', lineHeight: 1.7, fontSize: '0.875rem', margin: 0 }}>{desc}</p>
             </div>
           ))}
@@ -290,50 +294,45 @@ export default function App() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section style={{ padding: '96px max(32px, calc((100vw - 1100px) / 2))', background: '#f8f9fb', borderTop: '1px solid #eaeff3' }}>
-        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.7rem', fontWeight: 700, marginBottom: '14px' }}>
-            Early Users
-          </p>
-          <h2 style={{
-            fontFamily: 'Playfair Display, serif', fontWeight: 600,
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', color: NAVY, lineHeight: 1.2, margin: 0,
-          }}>
-            They get it.
-          </h2>
+      <section style={{ padding: '100px max(32px, calc((100vw - 1100px) / 2))', background: '#f8f9fb', borderTop: '1px solid #eaeff3', borderBottom: '1px solid #eaeff3' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '52px', flexWrap: 'wrap', gap: '12px' }}>
+          <div>
+            <p style={{ color: PLUM, textTransform: 'uppercase', letterSpacing: '0.14em', fontSize: '0.68rem', fontWeight: 700, marginBottom: '10px' }}>Early Users</p>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 600, fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', color: NAVY, lineHeight: 1.15, margin: 0 }}>
+              They get it.
+            </h2>
+          </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '16px' }}>
           {[
-            {
-              quote: "I wasted so much money trying random Pilates studios. I needed something like this months ago.",
-              name: 'Maya R.',
-              location: 'New York, NY',
-            },
-            {
-              quote: "The instructor makes or breaks the class. One honest review from a friend would have saved me three bad experiences.",
-              name: 'Chloe T.',
-              location: 'Chicago, IL',
-            },
-            {
-              quote: "It's like Strava but for fitness classes. I want to see what my friends are actually taking — not studio marketing.",
-              name: 'Ava S.',
-              location: 'Los Angeles, CA',
-            },
-          ].map(({ quote, name, location }) => (
-            <div key={name} className="testimonial-card" style={{ background: '#fff' }}>
-              <div style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: '2.5rem', color: `${PLUM}22`,
-                lineHeight: 0.8, fontWeight: 600,
-              }}>"</div>
-              <p style={{
-                fontFamily: 'Playfair Display, serif', fontStyle: 'italic',
-                fontSize: '0.98rem', color: NAVY, lineHeight: 1.75, flex: 1, margin: 0,
-              }}>{quote}</p>
-              <div style={{ borderTop: '1px solid #eaeff3', paddingTop: '16px' }}>
-                <p style={{ fontWeight: 600, fontSize: '0.82rem', color: NAVY, margin: 0 }}>{name}</p>
-                <p style={{ fontSize: '0.75rem', color: PLUM, marginTop: '3px', margin: 0 }}>{location}</p>
+            { quote: "I wasted so much money trying random Pilates studios. I needed something like this months ago.", name: 'Maya R.', location: 'New York, NY', initials: 'MR' },
+            { quote: "The instructor makes or breaks the class. One honest review from a friend would have saved me three bad experiences.", name: 'Chloe T.', location: 'Chicago, IL', initials: 'CT' },
+            { quote: "It's like Strava but for fitness classes. I want to see what my friends are actually taking — not studio marketing.", name: 'Ava S.', location: 'Los Angeles, CA', initials: 'AS' },
+          ].map(({ quote, name, location, initials }) => (
+            <div key={name} style={{
+              background: '#fff',
+              border: '1px solid #eaeff3',
+              borderRadius: '18px',
+              padding: '32px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
+            }}>
+              <p style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: '0.975rem', color: NAVY, lineHeight: 1.8, margin: 0, flex: 1 }}>
+                "{quote}"
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingTop: '16px', borderTop: '1px solid #f0f4f7' }}>
+                <div style={{
+                  width: 36, height: 36, borderRadius: '50%',
+                  background: `linear-gradient(135deg, ${LIGHT_BLUE}60, ${PLUM}60)`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '0.68rem', fontWeight: 700, color: NAVY, flexShrink: 0,
+                }}>{initials}</div>
+                <div>
+                  <p style={{ fontWeight: 600, fontSize: '0.82rem', color: NAVY, margin: 0 }}>{name}</p>
+                  <p style={{ fontSize: '0.73rem', color: PLUM, marginTop: '2px' }}>{location}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -342,49 +341,45 @@ export default function App() {
 
       {/* ── CTA ── */}
       <section id="cta" style={{
-        padding: '100px max(32px, calc((100vw - 1100px) / 2))',
+        padding: '110px max(32px, calc((100vw - 1100px) / 2))',
         background: NAVY,
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', borderRadius: '50%', background: `${PLUM}0e`, pointerEvents: 'none' }} />
-        <div style={{ position: 'relative', maxWidth: '480px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '5px', marginBottom: '24px' }}>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.5rem', color: LIGHT_BLUE }}>Your</span>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.75rem', color: '#fff' }}>Move</span>
+        {/* Subtle radial tint */}
+        <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${PLUM}18 0%, transparent 70%)`, pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', maxWidth: '500px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '6px', marginBottom: '28px' }}>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1.6rem', color: LIGHT_BLUE }}>Your</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontWeight: 400, fontSize: '1.85rem', color: '#fff' }}>Move</span>
           </div>
           <h2 style={{
             fontFamily: 'Playfair Display, serif', fontWeight: 600,
-            fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', color: '#fff',
-            lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '14px',
+            fontSize: 'clamp(2rem, 4.5vw, 3rem)', color: '#fff',
+            lineHeight: 1.1, letterSpacing: '-0.025em', marginBottom: '16px',
           }}>
             Be first.<br />Move smarter.
           </h2>
-          <p style={{ color: LIGHT_BLUE, fontSize: '0.95rem', marginBottom: '36px', lineHeight: 1.75, opacity: 0.85 }}>
-            Launching soon. Join the waitlist and be the first to know when Your Move comes to your city.
+          <p style={{ color: LIGHT_BLUE, fontSize: '0.95rem', marginBottom: '40px', lineHeight: 1.8, opacity: 0.8, maxWidth: '380px', margin: '0 auto 40px' }}>
+            Launching soon in your city. Join the waitlist for early access.
           </p>
           <SignupForm dark />
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{
-        background: '#0d1b26',
-        padding: '24px max(32px, calc((100vw - 1100px) / 2))',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: '12px',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-          <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '0.95rem', color: LIGHT_BLUE }}>Your</span>
-          <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', color: '#fff', fontSize: '1.05rem' }}>Move</span>
+      <footer style={{ background: '#0a161f', padding: '32px max(32px, calc((100vw - 1100px) / 2))' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+            <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300, fontSize: '1rem', color: LIGHT_BLUE }}>Your</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', color: '#fff', fontSize: '1.15rem' }}>Move</span>
+          </div>
+          <p style={{ color: '#4a6678', fontSize: '0.75rem', margin: 0, letterSpacing: '0.01em' }}>
+            your movement. your money. know before you go.
+          </p>
+          <p style={{ color: '#283e4e', fontSize: '0.73rem', margin: 0 }}>© {new Date().getFullYear()} Your Move</p>
         </div>
-        <p style={{ color: '#334e62', fontSize: '0.75rem', margin: 0 }}>
-          your movement. your money. know before you go.
-        </p>
-        <p style={{ color: '#1e3447', fontSize: '0.73rem', margin: 0 }}>
-          © {new Date().getFullYear()} Your Move
-        </p>
       </footer>
     </div>
   )
